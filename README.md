@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Druck Chemie México — Sitio web
 
-## Getting Started
+Sitio web nuevo de Druck Chemie México: Next.js (TypeScript + Tailwind CSS)
+desplegado en Railway, con Supabase como backend (base de datos, auth,
+storage) y GitHub como control de versiones. Cada push a `main` dispara un
+build/deploy automático en Railway.
 
-First, run the development server:
+## Estructura de secciones
+
+- `/` — Inicio
+- `/nosotros` — Misión, visión, valores
+- `/productos` — Catálogo por categorías (dato base en `src/data/productos.ts`,
+  pendiente de migrar a Supabase)
+- `/galeria` — Placeholder hasta recibir fotografías reales
+- `/contacto` — Formulario de contacto (`/api/contacto` guarda el lead en
+  Supabase si está configurado; si no, lo registra en logs del servidor)
+- `/cotizador` — Placeholder del futuro cotizador conectado a Supabase
+- `/blog` — Placeholder de noticias/blog dinámico
+- `/clientes` — Placeholder del área de clientes con Supabase Auth
+
+## Desarrollo local
 
 ```bash
+npm install
+cp .env.example .env.local   # y completar las llaves de Supabase
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ver `.env.example`. Las mismas variables deben configurarse en Railway
+(Settings → Variables) para que el sitio en producción se conecte a
+Supabase.
 
-## Learn More
+## Despliegue
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El servicio en Railway está conectado a este repositorio de GitHub con
+auto-deploy habilitado: cualquier push a la rama `main` reconstruye y
+despliega automáticamente.
