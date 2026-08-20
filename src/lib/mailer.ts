@@ -1,0 +1,56 @@
+import nodemailer from "nodemailer";
+
+// Notificaciones por correo del formulario de contacto, vía una cuenta de
+// Gmail dedicada (remitente técnico — no es el buzón que ve el cliente).
+// Requiere una "contraseña de aplicación" de Gmail, no la contraseña normal.
+const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
+const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
+const SALES_EMAIL = process.env.SALES_EMAIL || "ventas@druckchemie.com.mx";
+
+export const mailerConfigured = Boolean(SMTP_USER && SMTP_PASS);
+
+type ContactoLead = {
+  nombre: string;
+  empresa?: string | null;
+  email: string;
+  telefono?: string | null;
+  mensaje: string;
+};
+
+export async function sendContactNotification(lead: ContactoLead) {
+  if (!mailerConfigured) {
+    console.log(
+      "[mailer] SMTP no configurado todavía — no se envía correo de notificación."
+    );
+    return { sent: false, reason: "not_configured" as const };
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: false, // STARTTLS en el puerto 587
+    auth: { user: SMTP_USER, pass: SMTP_PASS },
+  });
+
+  const lineas = [
+    `Nombre: ${lead.nombre}`,
+    lead.empresa ? `Empresa: ${lead.empresa}` : null,
+    `Correo: ${lead.email}`,
+    lead.telefono ? `Teléfono: ${lead.telefono}` : null,
+    "",
+    "Mensaje:",
+    lead.mensaje,
+  ].filter(Boolean);
+
+  await transporter.sendMail({
+    from: `"Sitio Druck Chemie" <${SMTP_USER}>`,
+    to: SALES_EMAIL,
+    replyTo: lead.email,
+    subject: `Nueva solicitud de contacto — ${lead.nombre}`,
+    text: lineas.join("\n"),
+  });
+
+  return { sent: true as const };
+}

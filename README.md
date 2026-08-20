@@ -13,7 +13,10 @@ build/deploy automático en Railway.
   pendiente de migrar a Supabase)
 - `/galeria` — Placeholder hasta recibir fotografías reales
 - `/contacto` — Formulario de contacto (`/api/contacto` guarda el lead en
-  Supabase si está configurado; si no, lo registra en logs del servidor)
+  Supabase si está configurado, y además envía una notificación por correo a
+  `SALES_EMAIL` vía una cuenta de Gmail dedicada si `SMTP_USER`/`SMTP_PASS`
+  están configurados; si nada de eso está listo, el lead se registra en los
+  logs del servidor para no perderlo)
 - `/cotizador` — Placeholder del futuro cotizador conectado a Supabase
 - `/blog` — Placeholder de noticias/blog dinámico
 - `/clientes` — Placeholder del área de clientes con Supabase Auth

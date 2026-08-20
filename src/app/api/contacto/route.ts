@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin, supabaseAdminConfigured } from "@/lib/supabaseAdmin";
+import { sendContactNotification, mailerConfigured } from "@/lib/mailer";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
@@ -17,36 +18,41 @@ export async function POST(req: NextRequest) {
   }
 
   const { nombre, empresa, email, telefono, mensaje } = body;
+  const lead = { nombre, empresa, email, telefono, mensaje };
 
-  // Mientras Supabase no esté conectado (fase inicial del proyecto),
-  // registramos el lead en los logs del servidor para no perder mensajes.
-  if (!supabaseAdminConfigured || !supabaseAdmin) {
-    console.log("[contacto] Nuevo lead (Supabase aún no conectado):", {
+  // Guardado en Supabase si ya está conectado; si no, lo dejamos en los logs
+  // del servidor para no perder el mensaje mientras se termina de configurar.
+  let stored: "supabase" | "log" = "log";
+  if (supabaseAdminConfigured && supabaseAdmin) {
+    const { error } = await supabaseAdmin.from("leads").insert({
       nombre,
-      empresa,
+      empresa: empresa ?? null,
       email,
-      telefono,
+      telefono: telefono ?? null,
       mensaje,
+      origen: "formulario_contacto",
     });
-    return NextResponse.json({ ok: true, stored: "log" });
+    if (error) {
+      console.error("[contacto] Error al guardar lead en Supabase:", error);
+    } else {
+      stored = "supabase";
+    }
+  }
+  if (stored === "log") {
+    console.log("[contacto] Nuevo lead:", lead);
   }
 
-  const { error } = await supabaseAdmin.from("leads").insert({
-    nombre,
-    empresa: empresa ?? null,
-    email,
-    telefono: telefono ?? null,
-    mensaje,
-    origen: "formulario_contacto",
-  });
-
-  if (error) {
-    console.error("[contacto] Error al guardar lead en Supabase:", error);
-    return NextResponse.json(
-      { ok: false, error: "No se pudo guardar el mensaje." },
-      { status: 500 }
-    );
+  // Notificación por correo a ventas, independiente de si Supabase ya está
+  // conectado — así el equipo se entera de inmediato aunque falte esa pieza.
+  let mailed = false;
+  if (mailerConfigured) {
+    try {
+      const result = await sendContactNotification(lead);
+      mailed = result.sent;
+    } catch (err) {
+      console.error("[contacto] Error al enviar correo de notificación:", err);
+    }
   }
 
-  return NextResponse.json({ ok: true, stored: "supabase" });
+  return NextResponse.json({ ok: true, stored, mailed });
 }
