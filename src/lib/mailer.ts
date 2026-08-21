@@ -32,6 +32,12 @@ export async function sendContactNotification(lead: ContactoLead) {
     port: SMTP_PORT,
     secure: false, // STARTTLS en el puerto 587
     auth: { user: SMTP_USER, pass: SMTP_PASS },
+    // Sin estos límites, si Gmail no responde (credenciales inválidas,
+    // red bloqueada, etc.) la conexión se queda esperando varios minutos
+    // y el formulario del sitio parece "colgado". Con esto falla rápido.
+    connectionTimeout: 8000,
+    greetingTimeout: 8000,
+    socketTimeout: 8000,
   });
 
   const lineas = [

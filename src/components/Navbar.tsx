@@ -16,40 +16,42 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-brand-line bg-brand-cream/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg font-bold tracking-tight text-brand-navy">
-            DRUCK<span className="text-brand-accent">CHEMIE</span>
-          </span>
-          <span className="hidden text-xs font-medium uppercase tracking-widest text-brand-steel sm:inline">
-            México
-          </span>
+    <header className="sticky top-0 z-50 bg-brand-navy">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+        <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/druckchemie-logo.svg"
+            alt="Druck Chemie México"
+            width={234}
+            height={75}
+            className="h-10 w-auto sm:h-12"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-brand-blue transition hover:text-brand-accent"
+              className="text-xs font-semibold uppercase tracking-widest text-white/85 transition hover:text-brand-accent"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Link
             href="/cotizador"
-            className="rounded-md bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-accent-dark"
+            className="rounded-full bg-brand-accent px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-brand-navy shadow-sm transition hover:bg-white"
           >
             Solicitar cotización
           </Link>
         </div>
 
         <button
-          className="inline-flex items-center justify-center rounded-md p-2 text-brand-navy md:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-white lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Abrir menú"
         >
@@ -64,13 +66,13 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-brand-line bg-brand-cream md:hidden">
+        <div className="border-t border-white/10 bg-brand-navy lg:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded px-2 py-2 text-sm font-medium text-brand-blue hover:bg-white"
+                className="rounded px-2 py-2 text-sm font-medium text-white/85 hover:bg-white/10 hover:text-brand-accent"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
@@ -78,7 +80,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/cotizador"
-              className="mt-2 rounded-md bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-white"
+              className="mt-2 rounded-full bg-brand-accent px-4 py-2.5 text-center text-xs font-bold uppercase tracking-wide text-brand-navy"
               onClick={() => setOpen(false)}
             >
               Solicitar cotización

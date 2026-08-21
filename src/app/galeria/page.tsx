@@ -10,13 +10,13 @@ const placeholders = Array.from({ length: 8 }, (_, i) => i + 1);
 export default function GaleriaPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-20">
-      <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
+      <p className="text-xs font-semibold uppercase tracking-widest text-brand-accent">
         Galería
       </p>
-      <h1 className="mt-3 text-4xl font-bold tracking-tight text-brand-navy">
+      <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-brand-navy sm:text-5xl">
         Nuestra operación en imágenes
       </h1>
-      <p className="mt-6 max-w-3xl text-lg text-brand-blue/80">
+      <p className="mt-6 max-w-3xl border-l-4 border-brand-accent pl-6 text-lg text-brand-blue">
         En cuanto recibamos las fotografías de planta, producto y equipo, esta
         sección se llena con la galería real (guardada en Supabase Storage
         para poder administrarla sin tocar código). Por ahora se muestran

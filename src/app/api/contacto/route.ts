@@ -44,10 +44,16 @@ export async function POST(req: NextRequest) {
 
   // Notificación por correo a ventas, independiente de si Supabase ya está
   // conectado — así el equipo se entera de inmediato aunque falte esa pieza.
+  // Se protege con un límite de tiempo propio: si el SMTP no responde por
+  // cualquier motivo, el formulario del sitio no debe quedarse "colgado"
+  // esperando para siempre.
   let mailed = false;
   if (mailerConfigured) {
     try {
-      const result = await sendContactNotification(lead);
+      const timeout = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("timeout_envio_correo")), 10000)
+      );
+      const result = await Promise.race([sendContactNotification(lead), timeout]);
       mailed = result.sent;
     } catch (err) {
       console.error("[contacto] Error al enviar correo de notificación:", err);

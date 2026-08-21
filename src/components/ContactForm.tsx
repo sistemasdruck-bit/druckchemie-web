@@ -21,17 +21,26 @@ export default function ContactForm() {
       mensaje: String(data.get("mensaje") ?? ""),
     };
 
+    // Límite de tiempo del lado del navegador: si por cualquier razón el
+    // servidor no responde, el botón no debe quedarse en "Enviando..." para
+    // siempre — a los 15s se muestra el mensaje de error.
+    const controller = new AbortController();
+    const avisoTimeout = setTimeout(() => controller.abort(), 15000);
+
     try {
       const res = await fetch("/api/contacto", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       });
       if (!res.ok) throw new Error("request failed");
       setEstado("enviado");
       form.reset();
     } catch {
       setEstado("error");
+    } finally {
+      clearTimeout(avisoTimeout);
     }
   }
 

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f6f3;
-  --foreground: #12213a;
+  --background: #ffffff;
+  --foreground: #12160f;
 }
 
 @theme inline {
@@ -12,16 +12,21 @@
     Arial, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Paleta de marca Druck Chemie (provisional, hasta recibir manual de marca / logo) */
-  --color-brand-navy: #0b1f3a;
-  --color-brand-navy-dark: #071527;
-  --color-brand-blue: #14335c;
-  --color-brand-steel: #5c7896;
-  --color-brand-teal: #0e7c7b;
-  --color-brand-accent: #e8622c;
-  --color-brand-accent-dark: #c94f20;
-  --color-brand-cream: #f7f6f3;
-  --color-brand-line: #e3e0d8;
+  /* Paleta de marca Druck Chemie — alineada al sitio corporativo global
+     (druckchemie.com/es-es): verde de marca, gris del isotipo "DC", y
+     fondos oscuros para header/hero/footer, tomados del logo oficial y
+     del sitio de referencia el 2026-08-21. */
+  --color-brand-navy: #12160f;
+  --color-brand-navy-dark: #060806;
+  --color-brand-blue: #454a41;
+  --color-brand-steel: #939598;
+  --color-brand-teal: #1c2b10;
+  --color-brand-olive: #253514;
+  --color-brand-accent: #8dc63f;
+  --color-brand-accent-dark: #6ea82f;
+  --color-brand-cream: #ffffff;
+  --color-brand-mist: #f5f6f3;
+  --color-brand-line: #e4e4df;
 }
 
 body {

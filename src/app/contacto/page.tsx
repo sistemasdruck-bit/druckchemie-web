@@ -10,13 +10,13 @@ const TELEFONO = "+52 (55) 3536-8868";
 export default function ContactoPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-20">
-      <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
+      <p className="text-xs font-semibold uppercase tracking-widest text-brand-accent">
         Contacto
       </p>
-      <h1 className="mt-3 text-4xl font-bold tracking-tight text-brand-navy">
+      <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-brand-navy sm:text-5xl">
         Hablemos de tu operación
       </h1>
-      <p className="mt-6 max-w-2xl text-lg text-brand-blue/80">
+      <p className="mt-6 max-w-2xl border-l-4 border-brand-accent pl-6 text-lg text-brand-blue">
         Escríbenos y un asesor te contactará para revisar qué insumos
         necesitas según tu equipo y volumen de producción.
       </p>
