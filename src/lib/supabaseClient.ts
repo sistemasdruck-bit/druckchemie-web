@@ -1,9 +1,8 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { supabaseUrl, supabaseAnonKey } from "./supabaseEnv";
 
 // Cliente de navegador (usa la anon key — segura para exponer al público,
 // el acceso real se controla con Row Level Security en Supabase).
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export const supabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
