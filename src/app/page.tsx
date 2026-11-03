@@ -1,8 +1,12 @@
 import Link from "next/link";
-import { categoriasProductos } from "@/data/productos";
+import { getCatalogo } from "@/lib/catalogo";
 import ArrowLink from "@/components/ArrowLink";
 
-export default function Home() {
+// Se regenera como máximo cada 60 s (y al instante cuando se guarda en /admin).
+export const revalidate = 60;
+
+export default async function Home() {
+  const categoriasProductos = await getCatalogo();
   return (
     <div className="flex flex-col">
       {/* Hero */}

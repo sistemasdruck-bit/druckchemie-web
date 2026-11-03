@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { categoriasProductos } from "@/data/productos";
+import { getCatalogo } from "@/lib/catalogo";
 
 export const metadata: Metadata = {
   title: "Productos | Druck Chemie México",
 };
 
-export default function ProductosPage() {
+export const revalidate = 60;
+
+export default async function ProductosPage() {
+  const categoriasProductos = await getCatalogo();
   return (
     <div className="mx-auto max-w-6xl px-6 py-20">
       <p className="text-xs font-semibold uppercase tracking-widest text-brand-accent">
@@ -16,10 +19,10 @@ export default function ProductosPage() {
         Productos y líneas de trabajo
       </h1>
       <p className="mt-6 max-w-3xl border-l-4 border-brand-accent pl-6 text-lg text-brand-blue">
-        Este catálogo se moverá próximamente a una base de datos dinámica
-        (Supabase) para que se pueda actualizar sin tocar código: precios,
-        fichas técnicas y disponibilidad. Por ahora refleja el catálogo
-        publicado hoy en el sitio actual.
+        Químicos y consumibles para impresión offset convencional, híbrida y
+        UV, compatibles con las principales marcas de prensas del mercado.
+        Descarga la ficha técnica de cada producto o pídenos una
+        recomendación para tu equipo.
       </p>
 
       <div className="mt-8 flex flex-wrap gap-2">
@@ -45,15 +48,43 @@ export default function ProductosPage() {
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {cat.productos.map((producto) => (
                 <div
-                  key={producto.nombre}
-                  className="rounded-lg border border-brand-line bg-white p-5"
+                  key={producto.slug}
+                  className={`flex flex-col overflow-hidden rounded-lg border bg-white ${
+                    producto.destacado ? "border-brand-accent" : "border-brand-line"
+                  }`}
                 >
-                  <h3 className="font-bold text-brand-navy">
-                    {producto.nombre}
-                  </h3>
-                  <p className="mt-1.5 text-sm text-brand-blue/80">
-                    {producto.descripcion}
-                  </p>
+                  {producto.imagen_url && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={producto.imagen_url}
+                      alt={producto.nombre}
+                      loading="lazy"
+                      className="aspect-[4/3] w-full bg-brand-mist object-contain"
+                    />
+                  )}
+                  <div className="flex flex-1 flex-col p-5">
+                    {producto.destacado && (
+                      <span className="mb-2 self-start rounded-full bg-brand-accent px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-brand-navy">
+                        Destacado
+                      </span>
+                    )}
+                    <h3 className="font-bold text-brand-navy">
+                      {producto.nombre}
+                    </h3>
+                    <p className="mt-1.5 text-sm text-brand-blue/80">
+                      {producto.descripcion}
+                    </p>
+                    {producto.ficha_tecnica_url && (
+                      <a
+                        href={producto.ficha_tecnica_url}
+                        target="_blank"
+                        rel="noopener"
+                        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-brand-accent-dark hover:text-brand-navy"
+                      >
+                        Ficha técnica (PDF) ↓
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
