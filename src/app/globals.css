@@ -37,3 +37,15 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Flotación suave del emblema "20 años" en la portada */
+@keyframes dc-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-dc-float {
+  animation: dc-float 7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-dc-float { animation: none; }
+}

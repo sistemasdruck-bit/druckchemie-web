@@ -19,7 +19,9 @@ export default async function Home() {
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(120deg,rgba(37,53,20,0.9),rgba(6,8,6,0.97))]"
         />
-        <div className="relative mx-auto max-w-7xl border-l-4 border-brand-accent px-6 py-24 lg:py-32">
+        <div className="relative mx-auto max-w-7xl border-l-4 border-brand-accent px-6 py-16 lg:py-28">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div>
           <p className="mb-4 inline-block rounded-full border border-white/20 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-white/80">
             Químicos técnicos para artes gráficas
           </p>
@@ -39,6 +41,32 @@ export default async function Home() {
             <ArrowLink href="/productos" variant="light">
               Nuestros productos
             </ArrowLink>
+          </div>
+          </div>
+
+          {/* Emblema 20 años: halo verde + anillos finos que lo integran al fondo */}
+          <div className="relative order-first mx-auto w-full max-w-[250px] sm:max-w-sm lg:order-none lg:max-w-none">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[135%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(141,198,63,0.24),transparent_62%)]"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[118%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[150%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand-accent/15"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand/20-anos-blanco.png"
+              alt="20 años de Druck Chemie México"
+              width={1200}
+              height={627}
+              className="animate-dc-float relative w-full drop-shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
+            />
+          </div>
           </div>
 
           <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">

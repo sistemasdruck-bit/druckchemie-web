@@ -38,7 +38,36 @@ export default function NosotrosPage() {
         trabajando de la mano con imprentas y talleres en todo México.
       </p>
 
-      <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2">
+      {/* 20 años */}
+      <div className="mt-14 grid items-center gap-8 overflow-hidden rounded-2xl border border-brand-line bg-brand-mist p-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-12 md:p-12">
+        <div className="relative mx-auto w-full max-w-sm">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(141,198,63,0.18),transparent_65%)]"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/20-anos.png"
+            alt="20 años de Druck Chemie México"
+            width={1200}
+            height={627}
+            className="relative w-full"
+          />
+        </div>
+        <div className="border-l-4 border-brand-accent pl-6">
+          <h2 className="text-2xl font-extrabold text-brand-navy">
+            20 años construyendo confianza
+          </h2>
+          <p className="mt-3 text-brand-blue">
+            Dos décadas acompañando a imprentas y talleres de todo México con
+            productos de calidad, servicio cercano y entregas puntuales. Cada
+            año nos reafirma en lo que nos distingue: relaciones sólidas y
+            duraderas con nuestros clientes.
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div className="rounded-2xl bg-brand-mist p-8">
           <h2 className="text-xl font-bold text-brand-navy">Misión</h2>
           <p className="mt-3 text-brand-blue">
@@ -71,18 +100,6 @@ export default function NosotrosPage() {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="mt-16 rounded-2xl bg-brand-navy px-8 py-10 text-white">
-        <h2 className="text-xl font-bold">
-          Nota para dirección
-        </h2>
-        <p className="mt-2 text-sm text-white/75">
-          Este texto parte de la misión, visión y valores publicados hoy en
-          druckchemie.com.mx. Si tienen historia de la empresa, años de
-          operación, certificaciones o datos adicionales que quieran resaltar
-          aquí, los integro en la siguiente revisión.
-        </p>
       </div>
     </div>
   );
