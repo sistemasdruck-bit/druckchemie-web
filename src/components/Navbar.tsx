@@ -7,6 +7,7 @@ const links = [
   { href: "/", label: "Inicio" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/productos", label: "Productos" },
+  { href: "/rodillos", label: "Rodillos" },
   { href: "/galeria", label: "Galería" },
   { href: "/blog", label: "Noticias" },
   { href: "/contacto", label: "Contacto" },
@@ -29,7 +30,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-5 xl:gap-8 lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
