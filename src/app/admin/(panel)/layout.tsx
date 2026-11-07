@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const menu = [
   { href: "/admin", label: "Catálogo" },
   { href: "/admin/galeria", label: "Galería" },
+  { href: "/admin/cotizaciones", label: "Cotizaciones" },
   { href: "/admin/mensajes", label: "Mensajes" },
 ];
 

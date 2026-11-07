@@ -390,3 +390,18 @@ export async function marcarMensaje(f: FormData) {
   }
   ir(`/admin/mensajes${err ? `?err=${err}` : ""}`);
 }
+
+export async function marcarCotizacion(f: FormData) {
+  await requireAdmin();
+  let err: string | null = null;
+  try {
+    const { error } = await db()
+      .from("cotizaciones")
+      .update({ atendida: f.get("atendida") === "true" })
+      .eq("id", String(f.get("id")));
+    if (error) throw new Error(error.message);
+  } catch (e) {
+    err = errorTexto(e);
+  }
+  ir(`/admin/cotizaciones${err ? `?err=${err}` : ""}`);
+}

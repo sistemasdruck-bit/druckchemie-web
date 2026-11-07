@@ -74,16 +74,24 @@ export default async function ProductosPage() {
                     <p className="mt-1.5 text-sm text-brand-blue/80">
                       {producto.descripcion}
                     </p>
-                    {producto.ficha_tecnica_url && (
-                      <a
-                        href={producto.ficha_tecnica_url}
-                        target="_blank"
-                        rel="noopener"
-                        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-brand-accent-dark hover:text-brand-navy"
+                    <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-4">
+                      {producto.ficha_tecnica_url && (
+                        <a
+                          href={producto.ficha_tecnica_url}
+                          target="_blank"
+                          rel="noopener"
+                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent-dark hover:text-brand-navy"
+                        >
+                          Ficha técnica (PDF) ↓
+                        </a>
+                      )}
+                      <Link
+                        href={`/cotizador?producto=${encodeURIComponent(producto.slug)}`}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-navy hover:text-brand-accent-dark"
                       >
-                        Ficha técnica (PDF) ↓
-                      </a>
-                    )}
+                        Cotizar →
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
