@@ -22,20 +22,20 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 sm:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/brand/druckchemie-logo.svg"
-            alt="Druck Chemie México"
-            width={234}
-            height={75}
-            className="h-10 w-auto sm:h-12"
-          />
-          <span aria-hidden className="h-8 w-px bg-white/20 sm:h-10" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
             src="/brand/20-anos-blanco-sm.png"
             alt="20 años"
             width={360}
             height={188}
             className="h-8 w-auto sm:h-10"
+          />
+          <span aria-hidden className="h-8 w-px bg-white/20 sm:h-10" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/druckchemie-logo.svg"
+            alt="Druck Chemie México"
+            width={234}
+            height={75}
+            className="h-10 w-auto sm:h-12"
           />
         </Link>
 
