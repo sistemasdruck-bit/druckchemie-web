@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-brand-navy">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center gap-3 sm:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/brand/druckchemie-logo.svg"
@@ -28,9 +28,18 @@ export default function Navbar() {
             height={75}
             className="h-10 w-auto sm:h-12"
           />
+          <span aria-hidden className="h-8 w-px bg-white/20 sm:h-10" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/20-anos-blanco-sm.png"
+            alt="20 años"
+            width={360}
+            height={188}
+            className="h-8 w-auto sm:h-10"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-5 xl:gap-8 lg:flex">
+        <nav className="hidden items-center gap-8 xl:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -42,7 +51,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <Link
             href="/cotizador"
             className="rounded-full bg-brand-accent px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-brand-navy shadow-sm transition hover:bg-white"
@@ -52,7 +61,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="inline-flex items-center justify-center rounded-md p-2 text-white lg:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-white xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Abrir menú"
         >
@@ -67,7 +76,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-brand-navy lg:hidden">
+        <div className="border-t border-white/10 bg-brand-navy xl:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
             {links.map((link) => (
               <Link
