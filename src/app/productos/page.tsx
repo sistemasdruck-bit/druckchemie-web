@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getCatalogo } from "@/lib/catalogo";
+import { marcasRodillos } from "@/data/rodillos";
 
 export const metadata: Metadata = {
   title: "Productos | Druck Chemie México",
@@ -35,6 +36,12 @@ export default async function ProductosPage() {
             {cat.nombre}
           </a>
         ))}
+        <a
+          href="#rodillos"
+          className="rounded-full border border-brand-line px-4 py-1.5 text-sm font-medium text-brand-blue transition hover:border-brand-accent hover:bg-brand-accent hover:text-white"
+        >
+          Rodillos
+        </a>
       </div>
 
       <div className="mt-14 space-y-16">
@@ -98,6 +105,36 @@ export default async function ProductosPage() {
             </div>
           </section>
         ))}
+
+        <section id="rodillos" className="scroll-mt-28">
+          <h2 className="border-l-4 border-brand-accent pl-4 text-2xl font-extrabold text-brand-navy">
+            Rodillos
+          </h2>
+          <p className="mt-2 max-w-3xl pl-4 text-brand-blue/80">
+            Contamos con rodillos UV, convencionales e híbridos, según las
+            necesidades y especificaciones de la máquina de cada cliente.
+          </p>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {marcasRodillos.map((marca) => (
+              <div
+                key={marca.slug}
+                className="flex flex-col rounded-lg border border-brand-line bg-white p-5"
+              >
+                <h3 className="font-bold text-brand-navy">{marca.nombre}</h3>
+                <p className="mt-1.5 text-sm text-brand-blue/80">
+                  Rodillos para prensas {marca.nombre}.
+                </p>
+                <Link
+                  href="/contacto"
+                  className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-brand-navy hover:text-brand-accent-dark"
+                >
+                  Consultar →
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
 
       <div className="mt-16 rounded-2xl bg-brand-teal px-8 py-10 text-center text-white">
