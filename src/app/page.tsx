@@ -30,7 +30,7 @@ export default async function Home() {
           </h1>
           <p className="mt-6 max-w-xl text-lg text-white/80">
             Desarrollamos, fabricamos y distribuimos soluciones de fuente,
-            lavadores, aditivos para placas y consumibles para la industria
+            aditivos, auxiliares, lavadores y rodillos para la industria
             de la impresión offset, compatibles con los principales
             fabricantes de prensas del mercado.
           </p>
@@ -137,7 +137,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-[1px] bg-brand-line sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-[1px] bg-brand-line sm:grid-cols-2 lg:grid-cols-3">
             {categoriasProductos.map((cat, i) => (
               <Link
                 key={cat.slug}
